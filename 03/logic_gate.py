@@ -29,21 +29,36 @@ class LogicGate:
     def nor_gate(self, x1, x2):
         w1, w2, theta = -2, -2, -1.8
         return self._is_over_threshold(w1, w2, theta, x1, x2)
+    
+
+    def xor_gate(self, x1, x2):
+        s1 = self.nand_gate(x1, x2)
+        s2 = self.or_gate(x1, x2)
+        y = self.and_gate(s1, s2)
+        return y
 
 
     def test(self):
         inputs = [(0, 0), (0, 1), (1, 0), (1, 1)]
+        print('-----')
         for input in inputs:
             print(f'{input[0]} AND {input[1]} = {self.and_gate(input[0], input[1])}')
         
+        print('-----')
         for input in inputs:
             print(f'{input[0]} NAND {input[1]} = {self.nand_gate(input[0], input[1])}')
         
+        print('-----')
         for input in inputs:
             print(f'{input[0]} OR {input[1]} = {self.or_gate(input[0], input[1])}')
         
+        print('-----')
         for input in inputs:
             print(f'{input[0]} NOR {input[1]} = {self.nor_gate(input[0], input[1])}')   
+
+        print('-----')
+        for input in inputs:
+            print(f'{input[0]} XOR {input[1]} = {self.xor_gate(input[0], input[1])}') 
 
 
 if __name__ == "__main__":
