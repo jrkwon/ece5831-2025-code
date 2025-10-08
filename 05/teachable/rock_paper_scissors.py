@@ -27,7 +27,7 @@ class RockPaperScissors:
             "scissors2": "✌️"
         }
         
-    def predict(self, frame):
+    def _predict(self, frame):
         # Resize the frame to the size expected by the model
         resized_frame = cv2.resize(frame, self.size)
         
@@ -50,13 +50,13 @@ class RockPaperScissors:
     
 
     ## Function to get computer's random choice
-    def computer_choice(self):
+    def _computer_choice(self):
         # 0: rock, 1: paper, 2: scissors (scissors1 or scissors2)
         return random.choice([0, 1, 2, 3])
     
 
     ## Function to determine the winner
-    def get_winner(self, computer_choice, user_choice):
+    def _get_winner(self, computer_choice, user_choice):
         # 0: rock, 1: paper, 2: scissors1, 3: scissors2
         # Treat both 2 and 3 as scissors
         def is_scissors(choice):
@@ -81,7 +81,7 @@ class RockPaperScissors:
             return
         
         # Game instructions
-        print("*="*40)
+        print("*="*39)
         print(f"👾 Welcome to {self.imoji_dict['rock']}, {self.imoji_dict['paper']}, {self.imoji_dict['scissors1']}   Rock-Paper-Scissors Game!")
         print("📌 Press 'p' to play (ready your hand in front of the camera) or 'q' to exit.")
         
@@ -96,15 +96,15 @@ class RockPaperScissors:
                 
                 key = cv2.waitKey(1) & 0xFF
                 if key == ord('p'):  # Press 'p' to predict
-                    index, confidence_score = self.predict(frame)
+                    index, confidence_score = self._predict(frame)
                     #print(f"Predicted: {class_name} ({confidence_score * 100:.2f}%)")
 
                     your_choice = index
-                    computer_choice = self.computer_choice()
-                    winner = self.get_winner(computer_choice, your_choice)
+                    computer_choice = self._computer_choice()
+                    winner = self._get_winner(computer_choice, your_choice)
                     
                     # Display results
-                    print("-"*40)
+                    print("-"*78)
                     output1 = f"Your choice: {self.imoji_dict[self.class_names[your_choice]]}, "
                     output2 = f"Computer's choice: {self.imoji_dict[self.class_names[computer_choice]]}  ==> "
                     print(output1 + output2, end="")
