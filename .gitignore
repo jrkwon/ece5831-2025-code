@@ -1,3 +1,6 @@
+# Pickle files
+*.pkl
+
 # Kera models
 *.h5
 
