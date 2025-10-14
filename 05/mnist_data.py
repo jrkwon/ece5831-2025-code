@@ -97,5 +97,11 @@ class MnistData:
         return mnist_data
     
     def get_dataset(self):
+        # normalize images to [0, 1]
+        self.dataset['train_images'] = self.dataset['train_images'].astype(np.float32)
+        self.dataset['train_images'] /= 255.0
+        self.dataset['test_images'] = self.dataset['test_images'].astype(np.float32)
+        self.dataset['test_images'] /= 255.0
+        
         return (self.dataset['train_images'], self.dataset['train_labels']), \
                 (self.dataset['test_images'], self.dataset['test_labels'])
