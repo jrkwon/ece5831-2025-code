@@ -4,10 +4,11 @@ class Utility:
     def sigmoid(self, x):
         return 1 / (1 + np.exp(-x))
     
+    # revised to handle batch input
     def softmax(self, a):
-        c = np.max(a)
+        c = np.max(a, axis=1, keepdims=True)  # max per sample
         exp_a = np.exp(a - c)  # prevent overflow
-        sum_exp_a = np.sum(exp_a)
+        sum_exp_a = np.sum(exp_a, axis=1, keepdims=True)  # sum per sample
         y = exp_a / sum_exp_a
         return y
 
